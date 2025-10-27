@@ -1,0 +1,65 @@
+{
+    "makefile.configureOnOpen": true,
+    "cSpell.words": [
+        "CACHEDIR",
+        "Keysym",
+        "Pixmap",
+        "qtflags",
+        "SSHFS",
+        "Wextra",
+        "xbutton",
+        "xconfigure",
+        "xexpose"
+    ],
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/sonicandtailscd/Documents/Projects/SSH mounter/build",
+            "binaryPath": "/home/sonicandtailscd/Documents/Projects/SSH mounter/build/ssh_mounter",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "/home/sonicandtailscd/Documents/Projects/SSH mounter/build",
+            "binaryPath": "/home/sonicandtailscd/Documents/Projects/SSH mounter/build/ssh-mounter",
+            "binaryArgs": []
+        }
+    ],
+    "files.associations": {
+        "*.json": "jsonc",
+        "*.xm": "objective-cpp",
+        "array": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "functional": "cpp",
+        "initializer_list": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "numbers": "cpp",
+        "ostream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "type_traits": "cpp",
+        "tuple": "cpp",
+        "typeinfo": "cpp",
+        "utility": "cpp",
+        "*.moc": "cpp"
+    }
+}
