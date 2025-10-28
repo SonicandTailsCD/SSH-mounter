@@ -223,6 +223,7 @@ public:
         connect(mounter_, &SSHMounter::mountSuccess, this, &MainWindow::onMountSuccess);
         connect(mounter_, &SSHMounter::mountError, this, &MainWindow::onMountError);
         connect(mounter_, &SSHMounter::progressMessage, this, &MainWindow::textHandler);
+        connect(mounter_, &SSHMounter::passwordRequired, this, &MainWindow::onPasswordRequired);
         
         console.log("Application started");
     }
@@ -276,6 +277,7 @@ private slots:
 
     void onClickHost(int currentRow) {
         if (!store_) return;
+        if (currentRow < 0) return;
         SSHHost host = store_->getHosts()[currentRow];
         if (!mounts_) mountListUpdate();
         bool mounted = false;

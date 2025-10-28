@@ -31,32 +31,34 @@ class SSHMounter : public QObject {
     Q_OBJECT
 public:
     explicit SSHMounter(QObject* parent = nullptr);
-    
+
     bool mount(const SSHHost& host);
     void unmount(const QString& localPath);
-    
+
     // Check system capabilities
     static bool checkSSHFSInstalled();
     static bool checkFUSEAvailable();
     static QString checkWritePermission(const QString& path);
 
     void setState(MountState state);
-    
+
+public slots:
+    void supplyPassword(const QString& password); // UI calls this
+    void noPassword();
+
 signals:
     void stateChanged(MountState state);
     void mountSuccess();
     void mountError(const QString& error);
     void unmountSuccess();
-    void passwordRequired(); // Could trigger password dialog
-    void supplyPassword(const QString& password);
-    void noPassword();
+    void passwordRequired(); // Emitted by mounter when password request is detected
     void progressMessage(const QString& msg);
-    
+
 private slots:
     void onProcessFinished(int exitCode, QProcess::ExitStatus status);
     void onProcessError(QProcess::ProcessError error);
     void onProcessOutput();
-    
+
 private:
     QProcess* process_;
     MountState state_;
