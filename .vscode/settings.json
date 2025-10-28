@@ -1,6 +1,7 @@
 {
     "makefile.configureOnOpen": true,
     "cSpell.words": [
+        "autofs",
         "CACHEDIR",
         "Keysym",
         "Pixmap",

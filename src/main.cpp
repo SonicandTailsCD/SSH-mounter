@@ -35,6 +35,7 @@
 #include <QPropertyAnimation>
 #include <QFileDialog>
 #include <QCloseEvent>
+#include <QInputDialog>
 #include <cmath>
 
 Console console;
@@ -294,6 +295,25 @@ private slots:
             unmountBtn_->hide();
         }
     }
+
+    void onPasswordRequired() {
+        bool ok;
+        int id = hostList_->currentRow();
+        if (id < 0) return;
+
+        SSHHost host = store_->getHosts()[id];
+
+        QString password = QInputDialog::getText(this, QString("Login to %1@%2").arg(host.user).arg(host.host), QString("Authentication is required to SSH into %1@%2").arg(host.user).arg(host.host), QLineEdit::Password, QString(), &ok);
+
+        if (ok && !password.isEmpty()) {
+            mounter_->supplyPassword(password);
+        }
+        else {
+            statusLabel_->setText("Cancelled.");
+            mounter_->setState(MountState::Idle);
+            mounter_->noPassword();
+        }
+    }
     
     void removeHost() {
         int idx = hostList_->currentRow();
@@ -375,6 +395,8 @@ private slots:
 
     void onMountSuccess() {
         showCheckmark("Mounted successfully ✓");
+        mountBtn_->hide();
+        unmountBtn_->show();
     }
     
     void onMountError(const QString& error) {

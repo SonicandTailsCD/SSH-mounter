@@ -19,8 +19,11 @@
 #include <QFileInfo>
 #include <QDebug>
 #include <QEventLoop>
+#include <QString>
 
 extern Console console;
+
+const QString& newline = "\n";
 
 SSHMounter::SSHMounter(QObject* parent) 
     : QObject(parent), process_(nullptr), state_(MountState::Idle) {
@@ -210,6 +213,18 @@ void SSHMounter::onProcessOutput() {
         errors.contains("password", Qt::CaseInsensitive)) {
         emit passwordRequired();
     }
+}
+
+void SSHMounter::supplyPassword(const QString& password) {
+    if (process_ && process_->state() == QProcess::Running) {
+        process_->write((password + newline).toUtf8());
+        process_->closeWriteChannel();
+    }
+}
+
+void SSHMounter::noPassword() {
+    process_->terminate();
+    delete process_;
 }
 
 #include "ssh_mounter.moc"

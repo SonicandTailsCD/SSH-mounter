@@ -48,6 +48,8 @@ signals:
     void mountError(const QString& error);
     void unmountSuccess();
     void passwordRequired(); // Could trigger password dialog
+    void supplyPassword(const QString& password);
+    void noPassword();
     void progressMessage(const QString& msg);
     
 private slots:

@@ -108,15 +108,15 @@ src/ssh_mounter.moc: src/ssh_mounter.hpp
 	$(MOC) $(INCLUDES) src/ssh_mounter.hpp -o src/ssh_mounter.moc
 
 # Compile object files
-build/ssh_store.o: src/ssh_store.cpp src/ssh_store.hpp src/ssh_store.moc | build
+build/ssh_store.o: src/ssh_store.cpp src/ssh_store.hpp | build
 	@echo "[CXX] Compiling ssh_store.cpp..."
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c src/ssh_store.cpp -o build/ssh_store.o
 
-build/ssh_mounter.o: src/ssh_mounter.cpp src/ssh_mounter.hpp src/ssh_mounter.moc src/console.hpp | build
+build/ssh_mounter.o: src/ssh_mounter.cpp src/ssh_mounter.hpp src/console.hpp | build
 	@echo "[CXX] Compiling ssh_mounter.cpp..."
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c src/ssh_mounter.cpp -o build/ssh_mounter.o
 
-build/main.o: src/main.cpp src/main.moc src/console.hpp | build
+build/main.o: src/main.cpp src/console.hpp | build
 	@echo "[CXX] Compiling main.cpp..."
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c src/main.cpp -o build/main.o
 
