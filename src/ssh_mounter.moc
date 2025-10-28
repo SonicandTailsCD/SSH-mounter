@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SSHMounter_t {
-    QByteArrayData data[19];
-    char stringdata0[233];
+    QByteArrayData data[23];
+    char stringdata0[284];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,22 +44,27 @@ QT_MOC_LITERAL(8, 72, 14), // "unmountSuccess"
 QT_MOC_LITERAL(9, 87, 16), // "passwordRequired"
 QT_MOC_LITERAL(10, 104, 15), // "progressMessage"
 QT_MOC_LITERAL(11, 120, 3), // "msg"
-QT_MOC_LITERAL(12, 124, 17), // "onProcessFinished"
-QT_MOC_LITERAL(13, 142, 8), // "exitCode"
-QT_MOC_LITERAL(14, 151, 20), // "QProcess::ExitStatus"
-QT_MOC_LITERAL(15, 172, 6), // "status"
-QT_MOC_LITERAL(16, 179, 14), // "onProcessError"
-QT_MOC_LITERAL(17, 194, 22), // "QProcess::ProcessError"
-QT_MOC_LITERAL(18, 217, 15) // "onProcessOutput"
+QT_MOC_LITERAL(12, 124, 15), // "hostKeyMismatch"
+QT_MOC_LITERAL(13, 140, 14), // "supplyPassword"
+QT_MOC_LITERAL(14, 155, 8), // "password"
+QT_MOC_LITERAL(15, 164, 10), // "noPassword"
+QT_MOC_LITERAL(16, 175, 17), // "onProcessFinished"
+QT_MOC_LITERAL(17, 193, 8), // "exitCode"
+QT_MOC_LITERAL(18, 202, 20), // "QProcess::ExitStatus"
+QT_MOC_LITERAL(19, 223, 6), // "status"
+QT_MOC_LITERAL(20, 230, 14), // "onProcessError"
+QT_MOC_LITERAL(21, 245, 22), // "QProcess::ProcessError"
+QT_MOC_LITERAL(22, 268, 15) // "onProcessOutput"
 
     },
     "SSHMounter\0stateChanged\0\0MountState\0"
     "state\0mountSuccess\0mountError\0error\0"
     "unmountSuccess\0passwordRequired\0"
-    "progressMessage\0msg\0onProcessFinished\0"
-    "exitCode\0QProcess::ExitStatus\0status\0"
-    "onProcessError\0QProcess::ProcessError\0"
-    "onProcessOutput"
+    "progressMessage\0msg\0hostKeyMismatch\0"
+    "supplyPassword\0password\0noPassword\0"
+    "onProcessFinished\0exitCode\0"
+    "QProcess::ExitStatus\0status\0onProcessError\0"
+    "QProcess::ProcessError\0onProcessOutput"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,25 +74,28 @@ static const uint qt_meta_data_SSHMounter[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       6,       // signalCount
+       7,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   59,    2, 0x06 /* Public */,
-       5,    0,   62,    2, 0x06 /* Public */,
-       6,    1,   63,    2, 0x06 /* Public */,
-       8,    0,   66,    2, 0x06 /* Public */,
-       9,    0,   67,    2, 0x06 /* Public */,
-      10,    1,   68,    2, 0x06 /* Public */,
+       1,    1,   74,    2, 0x06 /* Public */,
+       5,    0,   77,    2, 0x06 /* Public */,
+       6,    1,   78,    2, 0x06 /* Public */,
+       8,    0,   81,    2, 0x06 /* Public */,
+       9,    0,   82,    2, 0x06 /* Public */,
+      10,    1,   83,    2, 0x06 /* Public */,
+      12,    0,   86,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      12,    2,   71,    2, 0x08 /* Private */,
-      16,    1,   76,    2, 0x08 /* Private */,
-      18,    0,   79,    2, 0x08 /* Private */,
+      13,    1,   87,    2, 0x0a /* Public */,
+      15,    0,   90,    2, 0x0a /* Public */,
+      16,    2,   91,    2, 0x08 /* Private */,
+      20,    1,   96,    2, 0x08 /* Private */,
+      22,    0,   99,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -96,10 +104,13 @@ static const uint qt_meta_data_SSHMounter[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,   11,
+    QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 14,   13,   15,
-    QMetaType::Void, 0x80000000 | 17,    7,
+    QMetaType::Void, QMetaType::QString,   14,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 18,   17,   19,
+    QMetaType::Void, 0x80000000 | 21,    7,
     QMetaType::Void,
 
        0        // eod
@@ -117,9 +128,12 @@ void SSHMounter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->unmountSuccess(); break;
         case 4: _t->passwordRequired(); break;
         case 5: _t->progressMessage((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 6: _t->onProcessFinished((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QProcess::ExitStatus(*)>(_a[2]))); break;
-        case 7: _t->onProcessError((*reinterpret_cast< QProcess::ProcessError(*)>(_a[1]))); break;
-        case 8: _t->onProcessOutput(); break;
+        case 6: _t->hostKeyMismatch(); break;
+        case 7: _t->supplyPassword((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 8: _t->noPassword(); break;
+        case 9: _t->onProcessFinished((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QProcess::ExitStatus(*)>(_a[2]))); break;
+        case 10: _t->onProcessError((*reinterpret_cast< QProcess::ProcessError(*)>(_a[1]))); break;
+        case 11: _t->onProcessOutput(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -166,6 +180,13 @@ void SSHMounter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
                 return;
             }
         }
+        {
+            using _t = void (SSHMounter::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SSHMounter::hostKeyMismatch)) {
+                *result = 6;
+                return;
+            }
+        }
     }
 }
 
@@ -198,13 +219,13 @@ int SSHMounter::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 12)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 12;
     }
     return _id;
 }
@@ -246,6 +267,12 @@ void SSHMounter::progressMessage(const QString & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 5, _a);
+}
+
+// SIGNAL 6
+void SSHMounter::hostKeyMismatch()
+{
+    QMetaObject::activate(this, &staticMetaObject, 6, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

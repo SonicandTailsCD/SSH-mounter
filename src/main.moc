@@ -136,8 +136,8 @@ int SpinnerWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[23];
-    char stringdata0[263];
+    QByteArrayData data[25];
+    char stringdata0[300];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -154,25 +154,28 @@ QT_MOC_LITERAL(4, 32, 4), // "text"
 QT_MOC_LITERAL(5, 37, 8), // "editHost"
 QT_MOC_LITERAL(6, 46, 11), // "onClickHost"
 QT_MOC_LITERAL(7, 58, 10), // "currentRow"
-QT_MOC_LITERAL(8, 69, 10), // "removeHost"
-QT_MOC_LITERAL(9, 80, 9), // "mountHost"
-QT_MOC_LITERAL(10, 90, 11), // "unmountHost"
-QT_MOC_LITERAL(11, 102, 19), // "onMountStateChanged"
-QT_MOC_LITERAL(12, 122, 10), // "MountState"
-QT_MOC_LITERAL(13, 133, 5), // "state"
-QT_MOC_LITERAL(14, 139, 15), // "mountListUpdate"
-QT_MOC_LITERAL(15, 155, 15), // "onProcessOutput"
-QT_MOC_LITERAL(16, 171, 14), // "onMountSuccess"
-QT_MOC_LITERAL(17, 186, 12), // "onMountError"
-QT_MOC_LITERAL(18, 199, 5), // "error"
-QT_MOC_LITERAL(19, 205, 13), // "showCheckmark"
-QT_MOC_LITERAL(20, 219, 3), // "msg"
-QT_MOC_LITERAL(21, 223, 15), // "refreshHostList"
-QT_MOC_LITERAL(22, 239, 23) // "checkSystemRequirements"
+QT_MOC_LITERAL(8, 69, 18), // "onPasswordRequired"
+QT_MOC_LITERAL(9, 88, 17), // "onHostKeyMismatch"
+QT_MOC_LITERAL(10, 106, 10), // "removeHost"
+QT_MOC_LITERAL(11, 117, 9), // "mountHost"
+QT_MOC_LITERAL(12, 127, 11), // "unmountHost"
+QT_MOC_LITERAL(13, 139, 19), // "onMountStateChanged"
+QT_MOC_LITERAL(14, 159, 10), // "MountState"
+QT_MOC_LITERAL(15, 170, 5), // "state"
+QT_MOC_LITERAL(16, 176, 15), // "mountListUpdate"
+QT_MOC_LITERAL(17, 192, 15), // "onProcessOutput"
+QT_MOC_LITERAL(18, 208, 14), // "onMountSuccess"
+QT_MOC_LITERAL(19, 223, 12), // "onMountError"
+QT_MOC_LITERAL(20, 236, 5), // "error"
+QT_MOC_LITERAL(21, 242, 13), // "showCheckmark"
+QT_MOC_LITERAL(22, 256, 3), // "msg"
+QT_MOC_LITERAL(23, 260, 15), // "refreshHostList"
+QT_MOC_LITERAL(24, 276, 23) // "checkSystemRequirements"
 
     },
     "MainWindow\0addHost\0\0textHandler\0text\0"
     "editHost\0onClickHost\0currentRow\0"
+    "onPasswordRequired\0onHostKeyMismatch\0"
     "removeHost\0mountHost\0unmountHost\0"
     "onMountStateChanged\0MountState\0state\0"
     "mountListUpdate\0onProcessOutput\0"
@@ -188,7 +191,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -196,21 +199,23 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   89,    2, 0x08 /* Private */,
-       3,    1,   90,    2, 0x08 /* Private */,
-       5,    0,   93,    2, 0x08 /* Private */,
-       6,    1,   94,    2, 0x08 /* Private */,
-       8,    0,   97,    2, 0x08 /* Private */,
-       9,    0,   98,    2, 0x08 /* Private */,
-      10,    0,   99,    2, 0x08 /* Private */,
-      11,    1,  100,    2, 0x08 /* Private */,
-      14,    0,  103,    2, 0x08 /* Private */,
-      15,    0,  104,    2, 0x08 /* Private */,
-      16,    0,  105,    2, 0x08 /* Private */,
-      17,    1,  106,    2, 0x08 /* Private */,
-      19,    1,  109,    2, 0x08 /* Private */,
-      21,    0,  112,    2, 0x08 /* Private */,
-      22,    0,  113,    2, 0x08 /* Private */,
+       1,    0,   99,    2, 0x08 /* Private */,
+       3,    1,  100,    2, 0x08 /* Private */,
+       5,    0,  103,    2, 0x08 /* Private */,
+       6,    1,  104,    2, 0x08 /* Private */,
+       8,    0,  107,    2, 0x08 /* Private */,
+       9,    0,  108,    2, 0x08 /* Private */,
+      10,    0,  109,    2, 0x08 /* Private */,
+      11,    0,  110,    2, 0x08 /* Private */,
+      12,    0,  111,    2, 0x08 /* Private */,
+      13,    1,  112,    2, 0x08 /* Private */,
+      16,    0,  115,    2, 0x08 /* Private */,
+      17,    0,  116,    2, 0x08 /* Private */,
+      18,    0,  117,    2, 0x08 /* Private */,
+      19,    1,  118,    2, 0x08 /* Private */,
+      21,    1,  121,    2, 0x08 /* Private */,
+      23,    0,  124,    2, 0x08 /* Private */,
+      24,    0,  125,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -220,12 +225,14 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 12,   13,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 14,   15,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   18,
     QMetaType::Void, QMetaType::QString,   20,
+    QMetaType::Void, QMetaType::QString,   22,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -242,17 +249,19 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->textHandler((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 2: _t->editHost(); break;
         case 3: _t->onClickHost((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: _t->removeHost(); break;
-        case 5: _t->mountHost(); break;
-        case 6: _t->unmountHost(); break;
-        case 7: _t->onMountStateChanged((*reinterpret_cast< MountState(*)>(_a[1]))); break;
-        case 8: _t->mountListUpdate(); break;
-        case 9: _t->onProcessOutput(); break;
-        case 10: _t->onMountSuccess(); break;
-        case 11: _t->onMountError((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 12: _t->showCheckmark((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 13: _t->refreshHostList(); break;
-        case 14: _t->checkSystemRequirements(); break;
+        case 4: _t->onPasswordRequired(); break;
+        case 5: _t->onHostKeyMismatch(); break;
+        case 6: _t->removeHost(); break;
+        case 7: _t->mountHost(); break;
+        case 8: _t->unmountHost(); break;
+        case 9: _t->onMountStateChanged((*reinterpret_cast< MountState(*)>(_a[1]))); break;
+        case 10: _t->mountListUpdate(); break;
+        case 11: _t->onProcessOutput(); break;
+        case 12: _t->onMountSuccess(); break;
+        case 13: _t->onMountError((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 14: _t->showCheckmark((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 15: _t->refreshHostList(); break;
+        case 16: _t->checkSystemRequirements(); break;
         default: ;
         }
     }
@@ -287,13 +296,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 15;
+        _id -= 17;
     }
     return _id;
 }

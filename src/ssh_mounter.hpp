@@ -41,6 +41,8 @@ public:
     static QString checkWritePermission(const QString& path);
 
     void setState(MountState state);
+    SSHHost getCurrentHost();
+    void removeHostKey();
 
 public slots:
     void supplyPassword(const QString& password); // UI calls this
@@ -53,6 +55,7 @@ signals:
     void unmountSuccess();
     void passwordRequired(); // Emitted by mounter when password request is detected
     void progressMessage(const QString& msg);
+    void hostKeyMismatch();
 
 private slots:
     void onProcessFinished(int exitCode, QProcess::ExitStatus status);

@@ -67,7 +67,7 @@ QString SSHMounter::checkWritePermission(const QString& path) {
 }
 
 bool SSHMounter::mount(const SSHHost& host) {
-    if (state_ != MountState::Idle) {
+    if (state_ != MountState::Idle || state_ != MountState::Error) {
         emit mountError("Already busy with another operation");
         return false;
     }
@@ -187,6 +187,10 @@ void SSHMounter::onProcessFinished(int exitCode, QProcess::ExitStatus status) {
     }
 }
 
+SSHHost SSHMounter::getCurrentHost() {
+    return currentHost_;
+}
+
 void SSHMounter::onProcessError(QProcess::ProcessError error) {
     QString msg;
     switch (error) {
@@ -213,6 +217,27 @@ void SSHMounter::onProcessOutput() {
         errors.contains("password", Qt::CaseInsensitive)) {
         emit passwordRequired();
     }
+
+    if (output.contains("WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!") || errors.contains("WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!")) {
+        emit hostKeyMismatch();
+    }
+}
+
+void SSHMounter::removeHostKey() {
+    if (process_) {
+        delete process_;
+    }
+    
+    process_ = new QProcess(this);
+    
+    QEventLoop loop;
+    connect(process_, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), &loop, &QEventLoop::quit);
+    connect(process_, &QProcess::errorOccurred, &loop, &QEventLoop::quit);
+    
+    process_->start("ssh-keygen", {"-R", currentHost_.host});
+    loop.exec();
+    
+    mount(currentHost_);
 }
 
 void SSHMounter::supplyPassword(const QString& password) {

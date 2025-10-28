@@ -224,6 +224,7 @@ public:
         connect(mounter_, &SSHMounter::mountError, this, &MainWindow::onMountError);
         connect(mounter_, &SSHMounter::progressMessage, this, &MainWindow::textHandler);
         connect(mounter_, &SSHMounter::passwordRequired, this, &MainWindow::onPasswordRequired);
+        connect(mounter_, &SSHMounter::hostKeyMismatch, this, &MainWindow::onHostKeyMismatch);
         
         console.log("Application started");
     }
@@ -314,6 +315,22 @@ private slots:
             statusLabel_->setText("Cancelled.");
             mounter_->setState(MountState::Idle);
             mounter_->noPassword();
+        }
+    }
+
+    void onHostKeyMismatch() {
+        int ret = QMessageBox::warning(this, "Host Key Mismatch", 
+            "The host key for " + mounter_->getCurrentHost().host + " has changed!\n"
+            "This could be a sign of a man-in-the-middle attack.\n\n"
+            "Do you want to remove the old key and reconnect?",
+            QMessageBox::Yes | QMessageBox::No);
+        
+        if (ret == QMessageBox::Yes) {
+            mounter_->removeHostKey();
+        }
+        else {
+            statusLabel_->setText("Cancelled.");
+            mounter_->setState(MountState::Idle);
         }
     }
     
