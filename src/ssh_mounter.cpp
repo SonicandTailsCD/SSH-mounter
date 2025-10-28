@@ -23,7 +23,7 @@
 
 extern Console console;
 
-const QString& newline = "\n";
+const QString newline = "\n";
 
 SSHMounter::SSHMounter(QObject* parent) 
     : QObject(parent), process_(nullptr), state_(MountState::Idle) {
