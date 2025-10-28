@@ -67,7 +67,7 @@ QString SSHMounter::checkWritePermission(const QString& path) {
 }
 
 bool SSHMounter::mount(const SSHHost& host) {
-    if (state_ != MountState::Idle || state_ != MountState::Error) {
+    if (state_ != MountState::Idle && state_ != MountState::Error) {
         emit mountError("Already busy with another operation");
         return false;
     }
@@ -92,7 +92,7 @@ bool SSHMounter::mount(const SSHHost& host) {
     QStringList args;
     args << remote << host.localPath;
     args << "-p" << QString::number(host.port);
-    args << "-o" << "reconnect,ServerAliveInterval=15,ServerAliveCountMax=3";
+    args << "-o" << "reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,ssh_command='ssh -S'";
     
     console.log("Mounting: sshfs", args.join(" ").toStdString());
     emit progressMessage("Connecting to " + host.host + "...");
