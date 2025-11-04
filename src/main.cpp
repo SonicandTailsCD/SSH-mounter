@@ -30,6 +30,7 @@
 #include <QSpinBox>
 #include <QLabel>
 #include <QMessageBox>
+#include <QCheckBox>
 #include <QTimer>
 #include <QPainter>
 #include <QPropertyAnimation>
@@ -99,6 +100,7 @@ public:
         portSpin_->setValue(22);
         remoteEdit_ = new QLineEdit(this);
         localEdit_ = new QLineEdit(this);
+        pubkeyCheck_ = new QCheckBox("Use Public Key Authentication", this);
         
         if (host) {
             nameEdit_->setText(host->name);
@@ -107,6 +109,7 @@ public:
             portSpin_->setValue(host->port);
             remoteEdit_->setText(host->remotePath);
             localEdit_->setText(host->localPath);
+            pubkeyCheck_->setChecked(host->usePublicKey);
         }
         
         layout->addRow("Name:", nameEdit_);
@@ -114,6 +117,7 @@ public:
         layout->addRow("Host:", hostEdit_);
         layout->addRow("Port:", portSpin_);
         layout->addRow("Remote Path:", remoteEdit_);
+        layout->addRow("", pubkeyCheck_);
         
         auto* localLayout = new QHBoxLayout();
         localLayout->addWidget(localEdit_);
@@ -146,6 +150,7 @@ public:
         h.port = portSpin_->value();
         h.remotePath = remoteEdit_->text();
         h.localPath = localEdit_->text();
+        h.usePublicKey = pubkeyCheck_->isChecked();
         return h;
     }
     
@@ -156,6 +161,7 @@ private:
     QSpinBox* portSpin_;
     QLineEdit* remoteEdit_;
     QLineEdit* localEdit_;
+    QCheckBox* pubkeyCheck_;
 };
 
 // Main window
@@ -283,7 +289,7 @@ private slots:
         if (!mounts_) mountListUpdate();
         bool mounted = false;
         for (const QString& mount : *mounts_) {
-            QString text = QString("%1@%2").arg(host.user).arg(host.host);
+            QString text = QString("%1@%2:%3").arg(host.user).arg(host.host).arg(host.remotePath);
             if (mount.contains(text)) {
                 mounted = true;
                 break;

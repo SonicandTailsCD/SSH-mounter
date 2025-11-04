@@ -27,6 +27,7 @@ struct SSHHost {
     QString remotePath;
     QString localPath;
     int port = 22;
+    bool usePublicKey = false;  // If true, use public key auth only. If false, use password auth.
     
     QJsonObject toJson() const;
     static SSHHost fromJson(const QJsonObject& obj);

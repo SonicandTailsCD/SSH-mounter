@@ -92,7 +92,16 @@ bool SSHMounter::mount(const SSHHost& host) {
     QStringList args;
     args << remote << host.localPath;
     args << "-p" << QString::number(host.port);
-    args << "-o" << "reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,ssh_command='ssh -S'";
+
+    QString options = "reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,max_conns=16";
+    if (!host.usePublicKey) {
+        // If not using public key, use password authentication and disable pubkey
+        options += ",password_stdin,PubkeyAuthentication=no";
+    } else {
+        // If using public key, disable password authentication
+        options += ",PasswordAuthentication=no";
+    }
+    args << "-o" << options;
     
     console.log("Mounting: sshfs", args.join(" ").toStdString());
     emit progressMessage("Connecting to " + host.host + "...");
@@ -102,18 +111,27 @@ bool SSHMounter::mount(const SSHHost& host) {
     }
     
     process_ = new QProcess(this);
+    process_->setProcessChannelMode(QProcess::MergedChannels);
     
+    // Create event loop but don't start it yet
     QEventLoop loop;
-    connect(process_, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), &loop, &QEventLoop::quit);
+    connect(process_, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), 
+            &loop, &QEventLoop::quit);
     connect(process_, &QProcess::errorOccurred, &loop, &QEventLoop::quit);
+    
+    // Connect our regular handlers
     connect(process_, &QProcess::readyReadStandardOutput, this, &SSHMounter::onProcessOutput);
     connect(process_, &QProcess::readyReadStandardError, this, &SSHMounter::onProcessOutput);
     
+    // For password auth, emit password prompt before starting
+    if (!host.usePublicKey) {
+        emit passwordRequired();
+    }
+    
     process_->start("sshfs", args);
-    loop.exec(); // Block until the process finishes or an error occurs
     
-    QString errors = process_->readAllStandardError();
-    
+    // Now wait for completion
+    loop.exec();    
     if (process_->exitCode() == 0 && process_->exitStatus() == QProcess::NormalExit) {
         setState(MountState::Idle);
         emit mountSuccess();
@@ -121,6 +139,7 @@ bool SSHMounter::mount(const SSHHost& host) {
         return true;
     } else {
         setState(MountState::Error);
+        QByteArray errors = process_->readAllStandardError();
         QString msg = errors.isEmpty() ? "Mount failed with unknown error" : errors;
         if (process_->error() == QProcess::FailedToStart) {
             msg = "Failed to start sshfs. Is it installed and in your PATH?";
@@ -213,8 +232,16 @@ void SSHMounter::onProcessOutput() {
     QString output = process_->readAllStandardOutput();
     QString errors = process_->readAllStandardError();
     
+    console.log("Process output:", output.toStdString());
+    console.log("Process errors:", errors.toStdString());
+
+    // Check for various password prompts that SSHFS/SSH might use
     if (output.contains("password", Qt::CaseInsensitive) || 
-        errors.contains("password", Qt::CaseInsensitive)) {
+        errors.contains("password", Qt::CaseInsensitive) ||
+        output.contains("Password:") ||
+        errors.contains("Password:") ||
+        output.contains("password for") ||
+        errors.contains("password for")) {
         emit passwordRequired();
     }
 

@@ -30,6 +30,7 @@ QJsonObject SSHHost::toJson() const {
     obj["remotePath"] = remotePath;
     obj["localPath"] = localPath;
     obj["port"] = port;
+    obj["usePublicKey"] = usePublicKey;
     return obj;
 }
 
@@ -41,6 +42,7 @@ SSHHost SSHHost::fromJson(const QJsonObject& obj) {
     h.remotePath = obj["remotePath"].toString();
     h.localPath = obj["localPath"].toString();
     h.port = obj["port"].toInt(22);
+    h.usePublicKey = obj["usePublicKey"].toBool(false);
     return h;
 }
 
