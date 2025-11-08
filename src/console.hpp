@@ -50,6 +50,7 @@ struct Console {
     void info(const Args&... args) {
         std::lock_guard lock(mtx);
         std::cout << CLR_INFO;
+        std::cout << "[INFO] " << CLR_RESET;
         (print_one(args), ...);
         std::cout << CLR_RESET << '\n' << std::flush;
     }
@@ -58,6 +59,7 @@ struct Console {
     void warn(const Args&... args) {
         std::lock_guard lock(mtx);
         std::cout << CLR_WARN;
+        std::cout << "[WARN] " << CLR_RESET;
         (print_one(args), ...);
         std::cout << CLR_RESET << '\n' << std::flush;
     }
@@ -66,6 +68,7 @@ struct Console {
     void error(const Args&... args) {
         std::lock_guard lock(mtx);
         std::cout << CLR_ERR;
+        std::cout << "[ERR] " << CLR_RESET;
         (print_one(args), ...);
         std::cout << CLR_RESET << '\n' << std::flush;
     }

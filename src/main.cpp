@@ -481,6 +481,7 @@ int main(int argc, char** argv) {
     QApplication app(argc, argv);
     MainWindow win;
     win.show();
+    console.info("[INFO] ", CLR_RESET, "Application started.");
     return app.exec();
 }
 
